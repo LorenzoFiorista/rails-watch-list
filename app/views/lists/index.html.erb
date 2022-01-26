@@ -10,7 +10,11 @@
 <div class="container">
   <% @lists.each do |list| %>
     <%= link_to list_path(list) do %>
-      <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url(https://media.newyorker.com/photos/59095ae96552fa0be682d821/16:9/w_1280,c_limit/video-on-demand.jpg)">
+      <% if list.photo.attached? %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url( <%= cl_image_path list.photo.key %> )">
+       <% else %>
+        <div class="card-category" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.3)), url( <%= list.picture %> )">
+       <% end %>
         <%= list.name %>
       </div>
     <% end %>
